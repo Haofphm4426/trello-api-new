@@ -1,5 +1,6 @@
 import express from 'express';
 import { StatusCodes } from 'http-status-codes';
+import { boardValidation } from '~/validations/boardValidation'
 
 const Router = express.Router();
 
@@ -7,8 +8,6 @@ Router.route('/')
   .get((req, res) => {
 
   })
-  .post((req, res) => {
+  .post(boardValidation.createNew);
 
-  });
-
-export const boardRoutes = Router;
+export const boardRoute = Router;
