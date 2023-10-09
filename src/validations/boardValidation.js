@@ -8,21 +8,17 @@ const createNew = async (req, res, next) => {
   });
 
   try {
-    console.log(req.body)
-
     //abortEarly: false để trường hợp có nhiều lỗi sẽ trả về tất cả
     await correctCondition.validateAsync(req.body, { abortEarly: false });
 
-    // next();
-    res.status(StatusCodes.OK).json({ message: 'POST from Validation: API create new board' });
+    next();
   } catch (error) {
-    console.log(error);
     res.status(StatusCodes.UNPROCESSABLE_ENTITY).json({
-      errors: new Error(error).message
-    })
+      errors: error.message
+    });
   }
-}
+};
 
 export const boardValidation = {
-  createNew,
-}
+  createNew
+};
