@@ -5,9 +5,11 @@ import { boardController } from '~/controllers/boardController';
 const Router = express.Router();
 
 Router.route('/')
-  .get((req, res) => {
-
-  })
+  .get((req, res) => {})
   .post(boardValidation.createNew, boardController.createNew);
+
+Router.route('/:id')
+  .get(boardController.getDetails)
+  .put()
 
 export const boardRoute = Router;
