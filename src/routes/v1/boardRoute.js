@@ -10,6 +10,6 @@ Router.route('/')
 
 Router.route('/:id')
   .get(boardController.getDetails)
-  .put()
+  .put();
 
 export const boardRoute = Router;
