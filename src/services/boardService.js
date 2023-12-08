@@ -12,7 +12,7 @@ const createNew = async (reqBody) => {
     };
 
     const createdBoard = await boardModel.createNew(newBoard);
-    const getNewBoard = await boardModel.findOneById(createdBoard.insertedId)
+    const getNewBoard = await boardModel.findOneById(createdBoard.insertedId);
     return getNewBoard;
   } catch (error) {
     throw new error;
