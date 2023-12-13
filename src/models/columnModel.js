@@ -53,7 +53,21 @@ const pushCardOrderIds = async (card) => {
       { returnDocument: 'after' } // Trả về document đc update, mặc định là trả về document chưa update
     );
 
-    return result.value;
+    return result;
+  } catch (error) {
+    throw new Error(error);
+  }
+};
+
+const update = async (boardId, updateData) => {
+  try {
+    const result = await GET_DB().collection(COLUMN_COLLECTION_NAME).findOneAndUpdate(
+      { _id: new ObjectId(boardId) },
+      { $set:  updateData},
+      { returnDocument: 'after' } // Trả về document đc update, mặc định là trả về document chưa update
+    );
+
+    return result;
   } catch (error) {
     throw new Error(error);
   }
@@ -64,5 +78,6 @@ export const columnModel = {
   COLUMN_COLLECTION_SCHEMA,
   createNew,
   findOneById,
-  pushCardOrderIds
+  pushCardOrderIds,
+  update
 };
