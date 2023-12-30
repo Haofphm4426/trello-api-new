@@ -27,7 +27,7 @@ const getDetails = async (boardId) => {
 
     const board = await boardModel.getDetails(boardId);
     if (!board) {
-      throw new ApiError(StatusCodes.NOT_FOUND);
+      throw new ApiError(StatusCodes.NOT_FOUND, 'Board not found!');
     }
 
     const resBoard = cloneDeep(board);

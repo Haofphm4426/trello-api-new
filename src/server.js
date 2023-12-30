@@ -26,9 +26,16 @@ const START_SERVER = () => {
   //Middleware xử lý lỗi
   app.use(errorHandlingMiddleware);
 
-  app.listen(env.APP_PORT, env.APP_HOST, () => {
-    console.log(`Hello ${env.AUTHOR}, I am running at ${ env.APP_HOST }:${ env.APP_PORT }/`);
-  });
+  if (env.BUILD_MODE === 'production') {
+    app.listen(process.env.PORT, () => {
+      console.log(`Production: Hello ${env.AUTHOR}, I am running at ${process.env.PORT}`);
+    });
+  } else {
+    app.listen(env.APP_PORT, env.APP_HOST, () => {
+      console.log(`Local: Hello ${env.AUTHOR}, I am running at ${ env.APP_HOST }:${ env.APP_PORT }/`);
+    });
+  }
+
 
   exitHook(() => {
     CLOSE_DB();
